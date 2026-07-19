@@ -1737,6 +1737,19 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && overlay.classList.contains('open')) closeOverlay();
     });
+
+    // Magnetic effect for hamburger menu
+    if (!reduceMotion && typeof gsap !== 'undefined') {
+      openBtn.addEventListener('mousemove', function (e) {
+        var rect = openBtn.getBoundingClientRect();
+        var x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+        var y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+        gsap.to(openBtn, { x: x, y: y, duration: 0.4, ease: 'power2.out' });
+      });
+      openBtn.addEventListener('mouseleave', function () {
+        gsap.to(openBtn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+      });
+    }
   })();
   </script>
 </body>
